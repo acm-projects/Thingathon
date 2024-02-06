@@ -34,7 +34,7 @@
 ## Tech Stack 🧱
 - *Front End*: [Flutter](https://docs.flutter.dev/get-started/install?gclid=CjwKCAiArY2fBhB9EiwAWqHK6oW__BekBV_XSP4G--yGBmP4DcX1WL2eH1e_uVbpLLZMPHSFWPv88BoCAB8QAvD_BwE&gclsrc=aw.ds) & [Figma](https://www.figma.com/)
 - *Back End*: [YOLOv7](https://github.com/WongKinYiu/yolov7), [AWS Lambda](https://aws.amazon.com/lambda/), & [Firebase](https://console.firebase.google.com/u/0/)
-- *IDE*: (Not really part of Tech Stack lol) [VSCode](https://code.visualstudio.com/)
+- *IDE*: (Not really part of Tech Stack lol) [VSCode](https://code.visualstudio.com/) & [Android Studio](https://developer.android.com/studio)
 
 
 ## Tutorials 👶
