@@ -3,8 +3,8 @@
 
 ## MVP 🏆
 
-- Allows user to take photo of object in app
-- Uses Yolov7 to identify object
+- Allows user to take photo of daily thing in app
+- Uses YOLOv7 to verify that photo taken contains daily thing
 - Allows user to see others photos of daily thing through Firebase server
 
 
@@ -12,9 +12,9 @@
 
 ## Stretch Goals 📊
 
-- Allow users to use calendar to see other people’s photos of past things
-- Vote for which thing it’ll be
-- Leaderboard and point system
+- Allow users to use calendar to see other people’s photos of past daily things
+- Voting system to decide what the next daily thing will be
+- Leaderboard and point system to reward repeated use of Thingathon
 
 
 
@@ -26,7 +26,7 @@
 | 2 | Make sure that everyone has their development environment set up, teach everyone Git |
 | 3 | Decide color palette and fonts; find general aesthetic; Begin Figma wireframing |
 | 4 - 6 | Implement frontend in Flutter, Set up Firebase |
-| 6 - 8 | Set up YoloV7 and API through AWS, Connect Front-end & back-end  |
+| 6 - 8 | Set up YoloV7 and API through AWS, Connect front-end & back-end  |
 | 8 - 10 | Presentation development and practice |
 | FINAL | Inevitable Victory|
 
