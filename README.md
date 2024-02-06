@@ -81,4 +81,4 @@
 ## Special Thanks 👏
 
  - Special thanks to ACM leadership for giving us the opportunity for Thingathon to happen
- - And special thanks to viewers like you. Thank you[.](https://www.youtube.com/watch?v=F6jWppEDoV8)
+ - And special thanks to viewers like you. Thank you[.]([https://www.youtube.com/watch?v=F6jWppEDoV8](https://www.youtube.com/watch?v=btN_ge9S9No)https://www.youtube.com/watch?v=btN_ge9S9No)
