@@ -1,5 +1,6 @@
-<p align="center"> <img src="https://raw.githubusercontent.com/acm-projects/Besties/main/Besties%20logo.png" alt="HTML5 Icon" style="width:80%;height:80%;"/> </p>
-<div align="center"> Have you ever worn clothes and have been like, “man, I want everyone to see my fit”. I have not. But I have had wanted to show the world my [insert common object]. Introducing Thingathon, the random object social media app the world needs. Every day, an object is randomly selected from the Thingathon servers that you have 24 hours to take a photo of. After taking the photo, you can see other people’s photos of the thing. </div>
+<p align="center"> <img src="https://github.com/acm-projects/Thingathon/blob/main/Thingathon.png?raw=true" alt="HTML5 Icon" style="width:140%;height:140%;"/> </p>
+<div align="center"> 
+ Have you ever worn clothes and have been like, “man, I want everyone to see my fit”. I have not. But I have had wanted to show the world my [insert common object]. Introducing Thingathon, the random object social media app the world needs. Every day, an object is randomly selected from the Thingathon servers that you have 24 hours to take a photo of. After taking the photo, you can see other people’s photos of the thing. </div>
 
 ## MVP 🏆
 
