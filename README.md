@@ -1,6 +1,5 @@
 <p align="center"> <img src="https://github.com/acm-projects/Thingathon/blob/main/Thingathon.png?raw=true" alt="HTML5 Icon" style="width:140%;height:140%;"/> </p>
-<div align="center"> 
- Have you ever worn clothes and have been like, “man, I want everyone to see my fit”. I have not. But I have had wanted to show the world my [insert common object]. Introducing Thingathon, the random object social media app the world needs. Every day, an object is randomly selected from the Thingathon servers that you have 24 hours to take a photo of. After taking the photo, you can see other people’s photos of the thing. </div>
+<div align="center"> Have you ever worn clothes and have been like, “man, I want everyone to see my fit”. I have not. But I have had wanted to show the world my [insert common object]. Introducing Thingathon, the random object social media app the world needs. Every day, an object is randomly selected from the Thingathon servers that you have 24 hours to take a photo of. After taking the photo, you can see other people’s photos of the thing. </div>
 
 ## MVP 🏆
 
@@ -34,7 +33,7 @@
 
 ## Tech Stack 🧱
 - *Front End*: [Flutter](https://docs.flutter.dev/get-started/install?gclid=CjwKCAiArY2fBhB9EiwAWqHK6oW__BekBV_XSP4G--yGBmP4DcX1WL2eH1e_uVbpLLZMPHSFWPv88BoCAB8QAvD_BwE&gclsrc=aw.ds) & [Figma](https://www.figma.com/)
-- *Back End*: [YOLOv7](https://github.com/WongKinYiu/yolov7), [AWS Lambda](https://aws.amazon.com/lambda/), Dart, & [Firebase](https://console.firebase.google.com/u/0/)
+- *Back End*: [YOLOv7](https://github.com/WongKinYiu/yolov7), [AWS Lambda](https://aws.amazon.com/lambda/), & [Firebase](https://console.firebase.google.com/u/0/)
 - *IDE*: (Not really part of Tech Stack lol) [VSCode](https://code.visualstudio.com/)
 
 
