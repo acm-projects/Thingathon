@@ -22,10 +22,9 @@
 ## Milestones 🗿
 |Week| To-Do |
 |--|--|
-| 1 | Assign frontend, backend, and fullstack |
+| 1 | Assign front-end, back-end, and full-stack; Begin Figma wireframing |
 | 2 | Make sure that everyone has their development environment set up, teach everyone Git |
-| 3 | Decide color palette and fonts; find general aesthetic; Begin Figma wireframing |
-| 4 - 6 | Implement frontend in Flutter, Set up Firebase |
+| 3 - 6 | Implement frontend in Flutter, Set up Firebase |
 | 6 - 8 | Set up YOLOv7 and API through AWS, Connect front-end & back-end  |
 | 8 - 10 | Presentation development and practice |
 | FINAL | Inevitable Victory|
