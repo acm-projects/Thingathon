@@ -4,7 +4,7 @@
 ## MVP 🏆
 
 - Allows user to take photo of daily thing in app
-- Uses YOLOv7 to verify that photo taken contains daily thing
+- Uses YOLOv8 to verify that photo taken contains daily thing
 - Allows user to see others photos of daily thing through Firebase server
 
 
@@ -25,20 +25,20 @@
 | 1 | Assign front-end, back-end, and full-stack; Begin Figma wireframing |
 | 2 | Make sure that everyone has their development environment set up, teach everyone Git |
 | 3 - 6 | Implement frontend in Flutter, Set up Firebase |
-| 6 - 8 | Set up YOLOv7 and API through AWS, Connect front-end & back-end  |
+| 6 - 8 | Set up YOLOv8 and API through AWS, Connect front-end & back-end  |
 | 8 - 10 | Presentation development and practice |
 | FINAL | Inevitable Victory|
 
 
 ## Tech Stack 🧱
 - *Front End*: [Flutter](https://docs.flutter.dev/get-started/install?gclid=CjwKCAiArY2fBhB9EiwAWqHK6oW__BekBV_XSP4G--yGBmP4DcX1WL2eH1e_uVbpLLZMPHSFWPv88BoCAB8QAvD_BwE&gclsrc=aw.ds) & [Figma](https://www.figma.com/)
-- *Back End*: [YOLOv7](https://github.com/WongKinYiu/yolov7), [AWS Lambda](https://aws.amazon.com/lambda/), & [Firebase](https://console.firebase.google.com/u/0/)
+- *Back End*: [YOLOv8](https://github.com/ultralytics/ultralytics), [AWS Lambda](https://aws.amazon.com/lambda/), & [Firebase](https://console.firebase.google.com/u/0/)
 - *IDE*: (Not really part of Tech Stack lol) [VSCode](https://code.visualstudio.com/) & [Android Studio](https://developer.android.com/studio)
 
 
 ## Tutorials 👶
 - [Flutter](https://www.youtube.com/watch?v=0SRvmcsRu2w)
-- [YOLOv7](https://www.youtube.com/watch?v=IboFrLHwxDg)
+- [YOLOv8](https://www.youtube.com/watch?v=aVKGjzAUHz0)
 - [AWS Lambda](https://www.youtube.com/watch?v=3Ar1ABlD_Vs)
 - [Firebase](https://www.youtube.com/playlist?list=PL4cUxeGkcC9j--TKIdkb3ISfRbJeJYQwC)
 - [Git](https://www.youtube.com/watch?v=HkdAHXoRtos)
