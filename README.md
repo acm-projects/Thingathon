@@ -38,7 +38,7 @@
 
 ## Tutorials 👶
 - [Flutter](https://www.youtube.com/watch?v=0SRvmcsRu2w)
-- [YOLOv8](https://www.youtube.com/watch?v=aVKGjzAUHz0)
+- [YOLOv8](https://www.youtube.com/watch?v=5ku7npMrW40)
 - [AWS Lambda](https://www.youtube.com/watch?v=3Ar1ABlD_Vs)
 - [Firebase](https://www.youtube.com/playlist?list=PL4cUxeGkcC9j--TKIdkb3ISfRbJeJYQwC)
 - [Git](https://www.youtube.com/watch?v=HkdAHXoRtos)
