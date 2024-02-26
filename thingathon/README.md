@@ -2,7 +2,7 @@
 
 Thingathon Flutter Project
 
-## Getting Started
+## How to run
 
 # cd into 'thingathon'
 
