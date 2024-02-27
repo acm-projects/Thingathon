@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyTextField extends StatelessWidget {
-  final controller;
+  final TextEditingController controller;
   final String hintText;
   final bool obscureText;
 
@@ -16,7 +16,7 @@ class MyTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 25.0),
+      padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: TextField(
         controller: controller,
         obscureText: obscureText,
@@ -31,7 +31,7 @@ class MyTextField extends StatelessWidget {
           fillColor: const Color.fromARGB(255, 255, 255, 255),
           hintText: hintText,
           hintStyle: GoogleFonts.poppins(
-            color: Color.fromARGB(255, 192, 192, 192),
+            color: const Color.fromARGB(255, 192, 192, 192),
             fontSize: 12,
           ),
           labelStyle: GoogleFonts.poppins(fontSize: 15, color: Colors.amber),

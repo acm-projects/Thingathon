@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:thingathon/components/my_button.dart';
@@ -10,7 +8,7 @@ import 'package:thingathon/components/signin_button.dart';
 class RegisterPage extends StatefulWidget {
   final Function()? changePage;
 
-  RegisterPage({
+  const RegisterPage({
     super.key,
     required this.changePage
   });
@@ -26,7 +24,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
   // User sign in method
   void signUp() {
-    print(Text("Signed Up"));
   }
 
   @override
@@ -53,7 +50,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 Text(
                   "Lets get signed up!",
                   style: GoogleFonts.poppins(
-                      color: Color(0xFFFF8159),
+                      color: const Color(0xFFFF8159),
                       fontWeight: FontWeight.bold,
                       fontSize: 18),
                 ),
@@ -87,7 +84,7 @@ class _RegisterPageState extends State<RegisterPage> {
             
                 // Log in button
                 MyButton(
-                  buttonColor: Color(0xFFFF8159),
+                  buttonColor: const Color(0xFFFF8159),
                   text: "Sign Up",
                   onTap: signUp,
                 ),
@@ -144,7 +141,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     Text(
                       "Already a member?",
                       style: GoogleFonts.poppins(
-                          color: Color.fromARGB(255, 58, 58, 58)),
+                          color: const Color.fromARGB(255, 58, 58, 58)),
                     ),
                     const SizedBox(
                       width: 3,

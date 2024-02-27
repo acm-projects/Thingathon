@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -24,8 +23,8 @@ class SignInButton extends StatelessWidget {
             ),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(100,30),
-                backgroundColor: Color(0xFFFF8159),
+                minimumSize: const Size(100,30),
+                backgroundColor: const Color(0xFFFF8159),
               ),
               onPressed: () {},
               child: Row(
@@ -53,6 +52,5 @@ class SignInButton extends StatelessWidget {
         ),
       ],
     );
-    ;
   }
 }

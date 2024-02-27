@@ -1,19 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:thingathon/components/my_button.dart';
 import 'package:thingathon/components/my_textfield.dart';
 import 'package:thingathon/components/signin_button.dart';
+import 'package:thingathon/pages/camera_page/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   final Function()? changePage;
 
-  LoginPage({
-    super.key,
-    required this.changePage
-  });
+  const LoginPage({super.key, required this.changePage});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -25,7 +21,14 @@ class _LoginPageState extends State<LoginPage> {
 
   // User sign in method
   void signIn() {
-    print(Text("Signed In"));
+    bool signInSuccess = true;
+
+    if (signInSuccess) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const HomePage()),
+      );
+    }
   }
 
   @override
@@ -52,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                 Text(
                   "Welcome to Thingathon!",
                   style: GoogleFonts.poppins(
-                      color: Color(0xFFFF8159),
+                      color: const Color(0xFFFF8159),
                       fontWeight: FontWeight.bold,
                       fontSize: 18),
                 ),
@@ -76,14 +79,14 @@ class _LoginPageState extends State<LoginPage> {
 
                 // Forgot password prompt
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Text(
                         "Forgot password?",
                         style: GoogleFonts.poppins(
-                          color: Color(0xFFFF8159),
+                          color: const Color(0xFFFF8159),
                           fontWeight: FontWeight.w600,
                           fontSize: 12,
                         ),
@@ -96,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 // Log in button
                 MyButton(
-                  buttonColor: Color(0xFFFF8159),
+                  buttonColor: const Color(0xFFFF8159),
                   text: "Log in",
                   onTap: signIn,
                 ),
@@ -154,7 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                     Text(
                       "Not a member?",
                       style: GoogleFonts.poppins(
-                          color: Color.fromARGB(255, 58, 58, 58)),
+                          color: const Color.fromARGB(255, 58, 58, 58)),
                     ),
                     const SizedBox(
                       width: 3,

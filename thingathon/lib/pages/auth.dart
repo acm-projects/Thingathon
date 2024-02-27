@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:thingathon/pages/login_register/login_register_buffer.dart';
-import 'home_page.dart';
+import 'camera_page/home_page.dart';
 
 class Auth extends StatefulWidget {
   const Auth({super.key});
@@ -16,11 +16,11 @@ class _AuthState extends State<Auth> {
   @override
   Widget build(BuildContext context) {
     if (loggedIn){
-      return HomePage();
+      return const HomePage();
     }
 
     else{
-      return LoginRegisterBuffer();
+      return const LoginRegisterBuffer();
     }
   }
 }
