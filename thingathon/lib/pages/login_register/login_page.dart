@@ -9,7 +9,10 @@ import 'package:thingathon/pages/camera_page/home_page.dart';
 class LoginPage extends StatefulWidget {
   final Function()? changePage;
 
-  const LoginPage({super.key, required this.changePage});
+  const LoginPage({
+    super.key,
+    required this.changePage,
+  });
 
   @override
   State<LoginPage> createState() => _LoginPageState();
