@@ -2,15 +2,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
-
-// Brute force way of having the selector bar pop up on each icon 
+// Brute force way of having the selector bar pop up on each icon
 //  -Have tap variable for each icon and set the state of all of them depending on which is pressed
 
 const Color navBarColor = Color.fromARGB(255, 45, 45, 45);
 
-class NavBar extends StatelessWidget {
-  const NavBar({super.key});
+class NavBar extends StatefulWidget {
+  NavBar({super.key});
+
+  @override
+  State<NavBar> createState() => _NavBarState();
+}
+
+class _NavBarState extends State<NavBar> {
+  int tappedIconIndex = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -31,21 +38,81 @@ class NavBar extends StatelessWidget {
             ),
           ],
         ),
-        child: const Padding(
+        child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 25.0),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              NavBarIcon(iconSize: 30, icon: FontAwesomeIcons.chartSimple),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    tappedIconIndex = 0;
+                  });
+                },
+                child: NavBarIcon(
+                  iconSize: 30,
+                  icon: FontAwesomeIcons.chartSimple,
+                  index: 0,
+                  selectedIndex: tappedIconIndex,
+                ),
+              ),
               Spacer(),
-              NavBarIcon(iconSize: 30, icon: FontAwesomeIcons.userGroup),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    tappedIconIndex = 1;
+                  });
+                },
+                child: NavBarIcon(
+                  iconSize: 30,
+                  icon: FontAwesomeIcons.userGroup,
+                  index: 1,
+                  selectedIndex: tappedIconIndex,
+                ),
+              ),
               Spacer(),
-              NavBarIcon(iconSize: 40, icon: FontAwesomeIcons.circle),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    tappedIconIndex = 2;
+                  });
+                },
+                child: NavBarIcon(
+                  iconSize: 30,
+                  icon: FontAwesomeIcons.circle,
+                  index: 2,
+                  selectedIndex: tappedIconIndex,
+                ),
+              ),
               Spacer(),
-              NavBarIcon(iconSize: 30, icon: FontAwesomeIcons.calendar),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    tappedIconIndex = 3;
+                  });
+                },
+                child: NavBarIcon(
+                  iconSize: 30,
+                  icon: FontAwesomeIcons.calendar,
+                  index: 3,
+                  selectedIndex: tappedIconIndex,
+                ),
+              ),
               Spacer(),
-              NavBarIcon(iconSize: 30, icon: FontAwesomeIcons.solidUser),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    tappedIconIndex = 4;
+                  });
+                },
+                child: NavBarIcon(
+                  iconSize: 30,
+                  icon: FontAwesomeIcons.solidUser,
+                  index: 4,
+                  selectedIndex: tappedIconIndex,
+                ),
+              ),
             ],
           ),
         ),
@@ -66,7 +133,7 @@ class TopBar extends StatelessWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       margin: const EdgeInsets.only(bottom: 2),
-      height: 4,
+      height: 8,
       width: tapped ? 20 : 0,
       decoration: const BoxDecoration(
         color: Color(0xFFFF8159),
@@ -79,11 +146,15 @@ class TopBar extends StatelessWidget {
 class NavBarIcon extends StatefulWidget {
   final IconData icon;
   final double iconSize;
+  final int index;
+  final int selectedIndex;
 
   const NavBarIcon({
     super.key,
     required this.icon,
     required this.iconSize,
+    required this.index,
+    required this.selectedIndex,
   });
 
   @override
@@ -91,7 +162,6 @@ class NavBarIcon extends StatefulWidget {
 }
 
 class _NavBarIconState extends State<NavBarIcon> {
-  bool tapped = true;
 
   @override
   Widget build(BuildContext context) {
@@ -99,25 +169,18 @@ class _NavBarIconState extends State<NavBarIcon> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        tapped
-            ? TopBar(tapped: tapped)
+        widget.selectedIndex == widget.index
+            ? TopBar(tapped: true)
             : const SizedBox(
                 height: 0,
                 width: 0,
               ),
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              tapped = !tapped;
-            });
-          },
-          child: SizedBox(
-            height: 60,
-            child: Icon(
-              widget.icon,
-              size: widget.iconSize,
-              color: const Color(0xFFf7f7f7),
-            ),
+        Container(
+          height: 50,
+          child: Icon(
+            widget.icon,
+            size: widget.iconSize,
+            color: const Color(0xFFf7f7f7),
           ),
         ),
       ],

@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:thingathon/components/bottom_navbar.dart';
 
 class FriendPage extends StatefulWidget {
   const FriendPage({super.key});
@@ -10,6 +12,9 @@ class FriendPage extends StatefulWidget {
 class _FriendPageState extends State<FriendPage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: Text("Friend Page"),
+      bottomNavigationBar: NavBar(),
+    );
   }
 }
