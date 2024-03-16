@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:thingathon/components/bottom_navbar.dart';
 
 class HomePage extends StatelessWidget {
@@ -10,7 +8,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(),
-      bottomNavigationBar: SafeArea(
+      bottomNavigationBar: const SafeArea(
         child: NavBar(),
       ),
     );

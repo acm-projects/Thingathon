@@ -4,14 +4,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:thingathon/components/my_button.dart';
 import 'package:thingathon/components/my_textfield.dart';
 import 'package:thingathon/components/signin_button.dart';
+import 'package:thingathon/pages/camera_page/home_page.dart';
 
 class RegisterPage extends StatefulWidget {
   final Function()? changePage;
 
-  const RegisterPage({
-    super.key,
-    required this.changePage
-  });
+  const RegisterPage({super.key, required this.changePage});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -24,6 +22,13 @@ class _RegisterPageState extends State<RegisterPage> {
 
   // User sign in method
   void signUp() {
+    bool signUpSuccess = true;
+    if (signUpSuccess) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const HomePage()),
+      );
+    }
   }
 
   @override
@@ -43,9 +48,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   height: 100,
                   fit: BoxFit.contain,
                 ),
-            
+
                 const SizedBox(height: 15),
-            
+
                 // Welcome text
                 Text(
                   "Lets get signed up!",
@@ -54,9 +59,9 @@ class _RegisterPageState extends State<RegisterPage> {
                       fontWeight: FontWeight.bold,
                       fontSize: 18),
                 ),
-            
+
                 const SizedBox(height: 30),
-            
+
                 // Input Fields
                 MyTextField(
                   controller: usernameController,
@@ -64,7 +69,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   obscureText: false,
                 ),
 
-                const SizedBox(height:10),
+                const SizedBox(height: 10),
 
                 MyTextField(
                   controller: passwordController,
@@ -72,25 +77,25 @@ class _RegisterPageState extends State<RegisterPage> {
                   obscureText: true,
                 ),
 
-                const SizedBox(height:10),
+                const SizedBox(height: 10),
 
                 MyTextField(
                   controller: passwordController,
                   hintText: "Confirm Password",
                   obscureText: true,
                 ),
-            
+
                 const SizedBox(height: 25),
-            
+
                 // Log in button
                 MyButton(
                   buttonColor: const Color(0xFFFF8159),
                   text: "Sign Up",
                   onTap: signUp,
                 ),
-            
+
                 const SizedBox(height: 20),
-            
+
                 // "OR" screen divider
                 Row(
                   children: [
@@ -119,9 +124,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ],
                 ),
-            
+
                 const SizedBox(height: 20),
-            
+
                 // "Continue with" buttons
                 const SignInButton(
                   text: "Continue with Apple",
@@ -131,7 +136,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   text: "Continue with Google",
                   fontAwesomeIcon: FontAwesomeIcons.google,
                 ),
-            
+
                 const SizedBox(height: 20),
 
                 Row(
@@ -158,7 +163,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ],
                 )
-        
               ],
             ),
           ),
