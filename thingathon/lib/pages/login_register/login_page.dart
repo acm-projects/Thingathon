@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:thingathon/components/my_button.dart';
 import 'package:thingathon/components/my_textfield.dart';
 import 'package:thingathon/components/signin_button.dart';
-import 'package:thingathon/pages/camera_page/home_page.dart';
+import 'package:thingathon/pages/base_page/base_page.dart';
 
 class LoginPage extends StatefulWidget {
   final Function()? changePage;
@@ -29,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
     if (signInSuccess) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(builder: (context) => const BasePage()),
       );
     }
   }
@@ -105,6 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                   buttonColor: const Color(0xFFFF8159),
                   text: "Log in",
                   onTap: signIn,
+                  horizontalMargin: 40,
                 ),
 
                 const SizedBox(height: 20),

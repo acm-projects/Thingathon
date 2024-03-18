@@ -2,6 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:thingathon/pages/calendar_page/calendar_page.dart';
+import 'package:thingathon/pages/camera_page/home_page.dart';
+import 'package:thingathon/pages/friends_page/friends_page.dart';
+import 'package:thingathon/pages/leaderboard_page/leaderboard_page.dart';
+import 'package:thingathon/pages/profile_page/profile_page.dart';
 
 // Brute force way of having the selector bar pop up on each icon
 //  -Have tap variable for each icon and set the state of all of them depending on which is pressed
@@ -17,6 +22,13 @@ class NavBar extends StatefulWidget {
 
 class _NavBarState extends State<NavBar> {
   int tappedIconIndex = 2;
+  final screens = [
+    const CalendarPage(),
+    const HomePage(),
+    const FriendPage(),
+    const LeaderBoard(),
+    const ProfilePage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +60,6 @@ class _NavBarState extends State<NavBar> {
                   setState(() {
                     tappedIconIndex = 0;
                   });
-                  
                 },
                 child: NavBarIcon(
                   iconSize: 30,
@@ -63,7 +74,6 @@ class _NavBarState extends State<NavBar> {
                   setState(() {
                     tappedIconIndex = 1;
                   });
-                  
                 },
                 child: NavBarIcon(
                   iconSize: 30,
@@ -78,7 +88,6 @@ class _NavBarState extends State<NavBar> {
                   setState(() {
                     tappedIconIndex = 2;
                   });
-                  
                 },
                 child: NavBarIcon(
                   iconSize: 30,
@@ -93,7 +102,6 @@ class _NavBarState extends State<NavBar> {
                   setState(() {
                     tappedIconIndex = 3;
                   });
-                  
                 },
                 child: NavBarIcon(
                   iconSize: 30,
@@ -108,7 +116,6 @@ class _NavBarState extends State<NavBar> {
                   setState(() {
                     tappedIconIndex = 4;
                   });
-                  
                 },
                 child: NavBarIcon(
                   iconSize: 30,

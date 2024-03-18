@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:thingathon/components/bottom_navbar.dart';
 
 class FriendPage extends StatefulWidget {
   const FriendPage({super.key});
@@ -13,7 +12,6 @@ class _FriendPageState extends State<FriendPage> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Text("Friend Page"),
-      bottomNavigationBar: NavBar(),
     );
   }
 }

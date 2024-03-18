@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:thingathon/components/bottom_navbar.dart';
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({super.key});
@@ -13,7 +12,6 @@ class _CalendarPageState extends State<CalendarPage> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Text("Calendar Page"),
-      bottomNavigationBar: NavBar(),
     );
   }
 }

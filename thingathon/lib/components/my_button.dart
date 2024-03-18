@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 class MyButton extends StatelessWidget {
   final Color buttonColor;
   final String text;
+  final double horizontalMargin;
   final Function()? onTap;
 
   const MyButton({
@@ -11,6 +12,7 @@ class MyButton extends StatelessWidget {
     required this.buttonColor,
     required this.text,
     required this.onTap,
+    required this.horizontalMargin,
   });
 
   @override
@@ -24,7 +26,7 @@ class MyButton extends StatelessWidget {
           top: 10,
           bottom: 10,
         ),
-        margin: const EdgeInsets.symmetric(horizontal: 45),
+        margin: EdgeInsets.symmetric(horizontal: horizontalMargin),
         decoration: BoxDecoration(
           color: buttonColor,
           borderRadius: BorderRadius.circular(10),
