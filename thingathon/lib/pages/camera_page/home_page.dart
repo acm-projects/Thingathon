@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:thingathon/components/bottom_navbar.dart';
+import 'package:thingathon/pages/camera_page/camera.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(),
-      bottomNavigationBar: const SafeArea(
-        child: NavBar(),
+    return Center(
+      child: Expanded(
+        child: Container(
+          child: CameraApp(),
+        ),
       ),
     );
   }
