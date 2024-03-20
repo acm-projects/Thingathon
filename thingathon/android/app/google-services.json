@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "223816673529",
+    "project_id": "thingathon-162d7",
+    "storage_bucket": "thingathon-162d7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:223816673529:android:ff4ecfcad0034a28f5da28",
+        "android_client_info": {
+          "package_name": "com.example.thingathon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "223816673529-pctoa5l0sr8bm3a9pik99lefe1svnjq4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.thingathon",
+            "certificate_hash": "6172058ce4880f75bbac2189e5f486873027c58f"
+          }
+        },
+        {
+          "client_id": "223816673529-btnr88l0em1cfcpuml6i2cabmja28fup.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDW99Qa-7LIYFPdFoxW3ENXz3hj93YJlOw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "223816673529-btnr88l0em1cfcpuml6i2cabmja28fup.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "223816673529-p3im3kh3ote96f8fmj514m75g700j9b0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.thingathon"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,10 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:thingathon/components/my_button.dart';
-import 'package:thingathon/components/my_textfield.dart';
-import 'package:thingathon/components/signin_button.dart';
-import 'package:thingathon/pages/camera_page/home_page.dart';
+import 'package:thingathon/helper/helper_functions.dart';
+import '../../components/my_button.dart';
+import '../../components/my_textfield.dart';
+import '../../components/signin_button.dart';
+import '../camera_page/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   final Function()? changePage;
@@ -16,18 +18,31 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final usernameController = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   // User sign in method
-  void signIn() {
-    bool signInSuccess = true;
+  Future<void> signIn() async{
+    showDialog(
+        context: context,
+        builder: (context) => const Center(
+          child: CircularProgressIndicator(), // show loading circle
+        ),
+    );
 
-    if (signInSuccess) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text
       );
+      if (context.mounted) {
+        Navigator.pop(context);
+      }
+    }
+
+    on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      displayMessageToUser(e.code, context);
     }
   }
 
@@ -64,8 +79,8 @@ class _LoginPageState extends State<LoginPage> {
 
                 // Input Fields
                 MyTextField(
-                  controller: usernameController,
-                  hintText: "Phone number, email, or username",
+                  controller: emailController,
+                  hintText: "Email or Username",
                   obscureText: false,
                 ),
                 const SizedBox(height: 20),
@@ -182,3 +197,4 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
+
