@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:thingathon/components/my_button.dart';
 import 'package:thingathon/components/my_textfield.dart';
 import 'package:thingathon/components/signin_button.dart';
+import 'package:thingathon/pages/base_page/base_page.dart';
 import 'package:thingathon/pages/camera_page/home_page.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -19,6 +20,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final usernameController = TextEditingController();
 
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   // User sign in method
   void signUp() {
@@ -26,7 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
     if (signUpSuccess) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(builder: (context) => const BasePage()),
       );
     }
   }
@@ -80,7 +82,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(height: 10),
 
                 MyTextField(
-                  controller: passwordController,
+                  controller: confirmPasswordController,
                   hintText: "Confirm Password",
                   obscureText: true,
                 ),

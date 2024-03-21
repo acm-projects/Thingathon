@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:thingathon/components/leaderboard_tab.dart';
@@ -84,19 +85,22 @@ class _LeaderBoardState extends State<LeaderBoard> {
                     ],
                   ),
                   const SizedBox(height: 15),
-                  Expanded(
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: users.length,
-                      itemBuilder: (context, index) {
-                        UserData user = users[index];
-                        return LeaderBoardTab(
-                          profileIcon: user.profileIcon,
-                          username: user.username,
-                          points: user.points,
-                        );
-                      },
-                      scrollDirection: Axis.vertical,
+                  LimitedBox(
+                    maxHeight: 550,
+                    child: Expanded(
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: users.length,
+                        itemBuilder: (context, index) {
+                          UserData user = users[index];
+                          return LeaderBoardTab(
+                            profileIcon: user.profileIcon,
+                            username: user.username,
+                            points: user.points,
+                          );
+                        },
+                        scrollDirection: Axis.vertical,
+                      ),
                     ),
                   ),
                 ],
