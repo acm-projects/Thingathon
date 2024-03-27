@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:thingathon/pages/camera_page/camera.dart';
+import 'package:thingathon/pages/camera_page/photo_screen.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
     return Center(
       child: Expanded(
         child: Container(
-          child: CameraApp(),
+          child: PhotoScreen(),
         ),
       ),
     );
