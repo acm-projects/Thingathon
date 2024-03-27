@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:thingathon/pages/login_register/login_page.dart';
 import 'package:thingathon/pages/login_register/register_page.dart';
+import '../pages/login_register/login_page.dart';
 
 class LoginRegisterBuffer extends StatefulWidget {
   const LoginRegisterBuffer({super.key});
