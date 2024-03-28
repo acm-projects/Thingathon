@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:thingathon/pages/calendar_page/calendar_page.dart';
 import 'package:thingathon/pages/camera_page/home_page.dart';
@@ -30,9 +28,19 @@ class _MyWidgetState extends State<BasePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: const Color(0xFFf7f7f7),
+        title: Image.asset(
+          'assets/Thingathon.png',
+          width: 150,
+          height: 50,
+          fit: BoxFit.contain,
+        ),
+      ),
       body: Container(
-          child: SafeArea(child: screens[tappedIconIndex]),
-          color: const Color(0xFFf7f7f7)),
+          color: const Color(0xFFf7f7f7),
+          child: SafeArea(child: screens[tappedIconIndex])),
       bottomNavigationBar: FractionallySizedBox(
         widthFactor: 1,
         heightFactor: 0.1,
@@ -92,7 +100,7 @@ class _MyWidgetState extends State<BasePage> {
                   },
                   child: NavBarIcon(
                     iconSize: 30,
-                    icon: FontAwesomeIcons.circle,
+                    icon: FontAwesomeIcons.camera,
                     index: 2,
                     selectedIndex: tappedIconIndex,
                   ),

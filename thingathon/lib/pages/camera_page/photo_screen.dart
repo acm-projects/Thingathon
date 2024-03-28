@@ -1,10 +1,13 @@
 import 'dart:io';
 import 'package:camera/camera.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart' as pathProvider;
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'package:get/get.dart';
+import 'package:thingathon/pages/camera_page/image_display.dart';
 
 class PhotoScreen extends StatefulWidget {
   const PhotoScreen({super.key});
@@ -20,13 +23,17 @@ class _PhotoScreenState extends State<PhotoScreen> {
 
   int _selectedCamIndex = 0;
   bool _isFrontCam = false;
-  bool _isFlashOn = false;
+  bool _isFlashOn = true;
+  bool _isCapturing = false;
   File? _capturedImage;
 
   bool _isReady = false;
 
   Future<void> requestCameraPermission() async {
     final cameraStatus = await Permission.camera.request();
+    if (!(await Permission.storage.status.isGranted)) {
+      await Permission.storage.request();
+    }
     if (cameraStatus.isGranted) {
       _cameras = await availableCameras();
       _controller = CameraController(_cameras[0], ResolutionPreset.max);
@@ -58,8 +65,6 @@ class _PhotoScreenState extends State<PhotoScreen> {
     }
   }
 
-  void toggleFlash() {}
-
   @override
   void initState() {
     super.initState();
@@ -72,6 +77,92 @@ class _PhotoScreenState extends State<PhotoScreen> {
     super.dispose();
   }
 
+  Future<void> _initCamera(_selectedCamIndex) async {
+    _controller =
+        CameraController(_cameras[_selectedCamIndex], ResolutionPreset.max);
+
+    try {
+      await _controller.initialize();
+      setState(() {
+        if (_selectedCamIndex == 0) {
+          _isFrontCam = false;
+        } else {
+          _isFrontCam = true;
+        }
+      });
+    } catch (e) {
+      print("e");
+    }
+
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  void toggleFlash() {
+    if (_isFlashOn) {
+      _controller.setFlashMode(FlashMode.off);
+      setState(() {
+        _isFlashOn = false;
+      });
+    } else {
+      _controller.setFlashMode(FlashMode.torch);
+      setState(() {
+        _isFlashOn = true;
+      });
+    }
+  }
+
+  void flipCamera() async {
+    if (_controller != null) {
+      await _controller.dispose();
+    }
+
+    _selectedCamIndex = (_selectedCamIndex + 1) % _cameras.length;
+    _initCamera(_selectedCamIndex);
+  }
+
+  void capturePhoto() async {
+    if (!_controller.value.isInitialized) {
+      return;
+    }
+
+    //final Directory appDir = await pathProvider.getApplicationSupportDirectory();
+    //final String capturePath = path.join(appDir.path, '${DateTime.now()}.jpg');
+
+    if (_controller.value.isTakingPicture) {
+      return;
+    }
+
+    try {
+      setState(() {
+        _isCapturing = true;
+      });
+
+      final XFile capturedImage = await _controller.takePicture();
+      File imageFile = File(capturedImage.path);
+      if (mounted) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ImageDisplay(imageFile: imageFile)));
+      }
+
+      // String imagePath = capturedImage.path;
+      // await GallerySaver.saveImage(imagePath);
+
+      // final String filePath = '$capturePath/${DateTime.now().millisecondsSinceEpoch}.jpg';
+      // _capturedImage = File(capturedImage.path);
+      // _capturedImage!.renameSync(filePath);
+    } catch (e) {
+      print("Error capturing photo");
+    } finally {
+      setState(() {
+        _isCapturing = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     if (!_isReady) return const Text("Loading...");
@@ -81,36 +172,63 @@ class _PhotoScreenState extends State<PhotoScreen> {
           children: [
             Expanded(
               child: Container(
-                margin: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(15),
-                  child: CameraPreview(_controller),
-                ),
+                margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
+                child: ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(8.0),
+                      topRight: Radius.circular(8.0),
+                      bottomRight: Radius.circular(8.0),
+                      bottomLeft: Radius.circular(8.0),
+                    ),
+                    child: AspectRatio(
+                        aspectRatio: 1, child: CameraPreview(_controller))),
               ),
             ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.beach_access,
-                  color: Colors.blue,
-                  size: 36.0,
-                ),
-                Icon(
-                  Icons.beach_access,
-                  color: Colors.blue,
-                  size: 36.0,
-                ),
-                Icon(
-                  Icons.beach_access,
-                  color: Colors.blue,
-                  size: 36.0,
-                ),
-              ],
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      toggleFlash();
+                    },
+                    child: _isFlashOn
+                        ? const Icon(
+                            Icons.flash_on,
+                            color: Color(0xFFFF8159),
+                            size: 30.0,
+                          )
+                        : const Icon(
+                            Icons.flash_off,
+                            color: Color(0xFFFF8159),
+                            size: 30.0,
+                          ),
+                  ),
+                  const SizedBox(width: 35),
+                  GestureDetector(
+                    onTap: () {
+                      capturePhoto();
+                    },
+                    child: const FaIcon(
+                      FontAwesomeIcons.circle,
+                      color: Color(0xFFFF8159),
+                      size: 60.0,
+                    ),
+                  ),
+                  const SizedBox(width: 35),
+                  GestureDetector(
+                    onTap: () {
+                      flipCamera();
+                    },
+                    child: const Icon(
+                      Icons.flip_camera_android,
+                      color: Color(0xFFFF8159),
+                      size: 30.0,
+                    ),
+                  ),
+                ],
+              ),
             )
           ],
         ),

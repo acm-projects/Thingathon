@@ -5,7 +5,6 @@ import 'package:thingathon/components/my_button.dart';
 import 'package:thingathon/components/my_textfield.dart';
 import 'package:thingathon/components/signin_button.dart';
 import 'package:thingathon/pages/base_page/base_page.dart';
-import 'package:thingathon/pages/camera_page/home_page.dart';
 
 class RegisterPage extends StatefulWidget {
   final Function()? changePage;
