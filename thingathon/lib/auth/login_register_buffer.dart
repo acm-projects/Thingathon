@@ -22,13 +22,9 @@ class _LoginRegisterBufferState extends State<LoginRegisterBuffer> {
   @override
   Widget build(BuildContext context) {
     if (loginPage){
-      return LoginPage(
-        changePage: togglePages,
-      );
-    } else{
-      return RegisterPage(
-        changePage: togglePages,
-      );
+      return LoginPage(changePage: togglePages);
+    } else {
+      return RegisterPage(changePage: togglePages);
     }
   }
 }

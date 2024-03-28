@@ -22,7 +22,7 @@ class _MyWidgetState extends State<BasePage> {
     const FriendPage(),
     const HomePage(),
     const CalendarPage(),
-    const ProfilePage(),
+    ProfilePage(),
   ];
 
   @override

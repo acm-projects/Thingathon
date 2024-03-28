@@ -1,10 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:thingathon/components/my_button.dart';
-import 'package:thingathon/components/my_textfield.dart';
-import 'package:thingathon/components/signin_button.dart';
-import 'package:thingathon/pages/base_page/base_page.dart';
+
+import '../../components/my_button.dart';
+import '../../components/my_textfield.dart';
+import '../../components/signin_button.dart';
+import '../../helper/helper_functions.dart';
 
 class RegisterPage extends StatefulWidget {
   final Function()? changePage;
@@ -16,21 +19,68 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final usernameController = TextEditingController();
+  // Text controllers
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPwController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
 
-  final passwordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
+  // User sign in method ------USER AUTH----------
+ void signUp() async {
+   // show loading circle
+    showDialog(
+        context: context,
+        builder: (context) => const Center(
+          child: CircularProgressIndicator(),
+        ),
+    );
 
-  // User sign in method
-  void signUp() {
-    bool signUpSuccess = true;
-    if (signUpSuccess) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const BasePage()),
-      );
+    // make sure passwords match
+    if(passwordController.text != confirmPwController.text) {
+      // pop loading circle
+      Navigator.pop(context);
+
+      // show error
+      displayMessageToUser("Passwords don't match!", context);
+    }
+
+    // If passwords do match
+    else {
+      // try creating the user
+      try {
+        // create User
+        UserCredential? userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: emailController.text,
+            password: passwordController.text,
+          );
+        // Create a user document and add to firestore
+        createUserDocument(userCredential);
+
+        // pop loading circle
+        if (context.mounted)Navigator.pop(context);
+      } on FirebaseAuthException catch (e) {
+        //pop Loading Circle
+        if (context.mounted) Navigator.pop(context);
+        // Display Error message to user
+        displayMessageToUser(e.code, context);
+      }
     }
   }
+
+ // Create a user document and collect them in Firestore
+  Future<void> createUserDocument(UserCredential? userCredential) async {
+   if (userCredential != null && userCredential.user != null) {
+     await FirebaseFirestore.instance
+         .collection("Users")
+         .doc(userCredential.user!.email)
+         .set({
+       'email': userCredential.user!.email,
+       'username': usernameController.text,
+     });
+   }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +116,15 @@ class _RegisterPageState extends State<RegisterPage> {
                 // Input Fields
                 MyTextField(
                   controller: usernameController,
-                  hintText: "Phone number, email, or username",
+                  hintText: "Username",
+                  obscureText: false,
+                ),
+
+                const SizedBox(height: 10),
+
+                MyTextField(
+                  controller: emailController,
+                  hintText: "Email",
                   obscureText: false,
                 ),
 
@@ -81,7 +139,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(height: 10),
 
                 MyTextField(
-                  controller: confirmPasswordController,
+                  controller: confirmPwController,
                   hintText: "Confirm Password",
                   obscureText: true,
                 ),
