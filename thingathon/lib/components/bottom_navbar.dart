@@ -27,7 +27,7 @@ class _NavBarState extends State<NavBar> {
     const HomePage(),
     const FriendPage(),
     const LeaderBoard(),
-    const ProfilePage(),
+    ProfilePage(),
   ];
 
   @override
