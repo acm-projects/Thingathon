@@ -2,11 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:thingathon/helper/helper_functions.dart';
-import '../../components/my_button.dart';
-import '../../components/my_textfield.dart';
-import '../../components/signin_button.dart';
-import '../camera_page/home_page.dart';
+import 'package:thingathon/components/my_button.dart';
+import 'package:thingathon/components/my_textfield.dart';
+import 'package:thingathon/components/signin_button.dart';
+import 'package:thingathon/pages/base_page/base_page.dart';
+
+import '../../helper/helper_functions.dart';
+import 'forgot_password_page.dart';
 
 class LoginPage extends StatefulWidget {
   final Function()? changePage;
@@ -35,13 +37,12 @@ class _LoginPageState extends State<LoginPage> {
           email: emailController.text,
           password: passwordController.text
       );
-      if (context.mounted) {
-        Navigator.pop(context);
-      }
+      if (context.mounted) Navigator.pop(context);
+
     }
 
     on FirebaseAuthException catch (e) {
-      Navigator.pop(context);
+      if (context.mounted) Navigator.pop(context);
       displayMessageToUser(e.code, context);
     }
   }
@@ -80,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                 // Input Fields
                 MyTextField(
                   controller: emailController,
-                  hintText: "Email or Username",
+                  hintText: "Email",
                   obscureText: false,
                 ),
                 const SizedBox(height: 20),
@@ -92,20 +93,33 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 10),
 
-                // Forgot password prompt
+
+                //Forgot password prompt
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
-                        "Forgot password?",
-                        style: GoogleFonts.poppins(
-                          color: const Color(0xFFFF8159),
-                          fontWeight: FontWeight.w600,
-                          fontSize: 12,
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context){
+                                return ForgotPasswordPage();
+                              },
+                            ),
+                          );
+                        },
+                        child: Text(
+                          "Forgot password?",
+                          style: GoogleFonts.poppins(
+                            color: const Color(0xFFFF8159),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12,
+                          ),
                         ),
-                      ),
+                      )
                     ],
                   ),
                 ),
@@ -117,6 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                   buttonColor: const Color(0xFFFF8159),
                   text: "Log in",
                   onTap: signIn,
+                  horizontalMargin: 40,
                 ),
 
                 const SizedBox(height: 20),
@@ -197,4 +212,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
