@@ -84,7 +84,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
                   ),
                   const SizedBox(height: 15),
                   LimitedBox(
-                    maxHeight: 550,
+                    maxHeight: 500,
                     child: Expanded(
                       child: ListView.builder(
                         shrinkWrap: true,

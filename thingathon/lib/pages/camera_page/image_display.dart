@@ -7,7 +7,9 @@ class ImageDisplay extends StatelessWidget {
   final File imageFile;
   const ImageDisplay({super.key, required this.imageFile});
 
-  void submitImage() {}
+  void submitImage() {
+    
+  }
 
   @override
   Widget build(BuildContext context) {
