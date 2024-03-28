@@ -30,6 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   // User sign in method ------USER AUTH----------
  void signUp() async {
+   // show loading circle
     showDialog(
         context: context,
         builder: (context) => const Center(
@@ -39,7 +40,10 @@ class _RegisterPageState extends State<RegisterPage> {
 
     // make sure passwords match
     if(passwordController.text != confirmPwController.text) {
+      // pop loading circle
       Navigator.pop(context);
+
+      // show error
       displayMessageToUser("Passwords don't match!", context);
     }
 
@@ -50,17 +54,17 @@ class _RegisterPageState extends State<RegisterPage> {
         // create User
         UserCredential? userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
-              email: emailController.text,
-              password: passwordController.text,
+            email: emailController.text,
+            password: passwordController.text,
           );
         // Create a user document and add to firestore
         createUserDocument(userCredential);
 
         // pop loading circle
-        if (context.mounted) Navigator.pop(context);
+        if (context.mounted)Navigator.pop(context);
       } on FirebaseAuthException catch (e) {
         //pop Loading Circle
-        Navigator.pop(context);
+        if (context.mounted) Navigator.pop(context);
         // Display Error message to user
         displayMessageToUser(e.code, context);
       }
@@ -98,9 +102,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   height: 100,
                   fit: BoxFit.contain,
                 ),
-            
+
                 const SizedBox(height: 15),
-            
+
                 // Welcome text
                 Text(
                   "Lets get signed up!",
@@ -109,17 +113,25 @@ class _RegisterPageState extends State<RegisterPage> {
                       fontWeight: FontWeight.bold,
                       fontSize: 18),
                 ),
-            
+
                 const SizedBox(height: 30),
-            
+
                 // Input Fields
                 MyTextField(
                   controller: usernameController,
-                  hintText: "Email or Username",
+                  hintText: "Username",
                   obscureText: false,
                 ),
 
-                const SizedBox(height:10),
+                const SizedBox(height: 10),
+
+                MyTextField(
+                  controller: emailController,
+                  hintText: "Email",
+                  obscureText: false,
+                ),
+
+                const SizedBox(height: 10),
 
                 MyTextField(
                   controller: passwordController,
@@ -127,25 +139,26 @@ class _RegisterPageState extends State<RegisterPage> {
                   obscureText: true,
                 ),
 
-                const SizedBox(height:10),
+                const SizedBox(height: 10),
 
                 MyTextField(
-                  controller: passwordController,
+                  controller: confirmPwController,
                   hintText: "Confirm Password",
                   obscureText: true,
                 ),
-            
+
                 const SizedBox(height: 25),
-            
+
                 // Log in button
                 MyButton(
                   buttonColor: const Color(0xFFFF8159),
                   text: "Sign Up",
                   onTap: signUp,
+                  horizontalMargin: 40,
                 ),
-            
+
                 const SizedBox(height: 20),
-            
+
                 // "OR" screen divider
                 Row(
                   children: [
@@ -174,9 +187,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ],
                 ),
-            
+
                 const SizedBox(height: 20),
-            
+
                 // "Continue with" buttons
                 const SignInButton(
                   text: "Continue with Apple",
@@ -186,7 +199,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   text: "Continue with Google",
                   fontAwesomeIcon: FontAwesomeIcons.google,
                 ),
-            
+
                 const SizedBox(height: 20),
 
                 Row(
@@ -213,7 +226,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ],
                 )
-        
               ],
             ),
           ),

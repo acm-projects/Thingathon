@@ -1,20 +1,8 @@
-import 'package:camera/camera.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:flutter/material.dart';
 
-late List<CameraDescription> _cameras;
-Future<void> requestCameraPermission() async {
-  final cameraStatus = await Permission.camera.request();
-  if (cameraStatus.isGranted) {
-    _cameras = await availableCameras();
-  } else if (cameraStatus.isDenied) {
-    print("Camera permission denied");
-    return;
-  } else if (cameraStatus.isPermanentlyDenied) {
-    print("Camera permission denied. Please change permissions in settings");
-    return;
-  }
-}
+import 'package:camera/camera.dart';
+import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:thingathon/controller/camera_controller.dart';
 
 class CameraApp extends StatefulWidget {
   const CameraApp({super.key});
@@ -24,43 +12,17 @@ class CameraApp extends StatefulWidget {
 }
 
 class _CameraAppState extends State<CameraApp> {
-  late CameraController controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = CameraController(_cameras[0], ResolutionPreset.max);
-    controller.initialize().then((_) {
-      if (!mounted) {
-        return;
-      }
-      setState(() {});
-    }).catchError((Object e) {
-      if (e is CameraException) {
-        switch (e.code) {
-          case 'CameraAccessDenied':
-            // Handle access errors here.
-            break;
-          default:
-            // Handle other errors here.
-            break;
-        }
-      }
-    });
-  }
-
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 200,
-      height: 500,
+    return Scaffold(
+      body: GetBuilder<CameraPermissionController>(
+          init: CameraPermissionController(),
+          builder: (controller) {
+            return controller.isCameraInitialized.value
+                ? CameraPreview(controller.cameraController)
+                : const Center(child: Text("Loading Preview..."));
+          }),
     );
   }
 }
+//

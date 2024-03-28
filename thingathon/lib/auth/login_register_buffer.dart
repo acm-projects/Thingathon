@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:thingathon/pages/login_register/login_page.dart';
 import 'package:thingathon/pages/login_register/register_page.dart';
-import '../pages/login_register/login_page.dart';
 
 class LoginRegisterBuffer extends StatefulWidget {
   const LoginRegisterBuffer({super.key});
@@ -22,13 +22,9 @@ class _LoginRegisterBufferState extends State<LoginRegisterBuffer> {
   @override
   Widget build(BuildContext context) {
     if (loginPage){
-      return LoginPage(
-        changePage: togglePages,
-      );
-    } else{
-      return RegisterPage(
-        changePage: togglePages,
-      );
+      return LoginPage(changePage: togglePages);
+    } else {
+      return RegisterPage(changePage: togglePages);
     }
   }
 }
