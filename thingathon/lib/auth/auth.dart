@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../pages/base_page/base_page.dart';
+import '../pages/camera_page/home_page.dart';
 import 'login_register_buffer.dart';
 
 class Auth extends StatelessWidget {

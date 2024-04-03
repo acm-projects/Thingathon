@@ -69,8 +69,10 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../components/my_button.dart';
 
 class ProfilePage extends StatelessWidget {
   ProfilePage({super.key});
@@ -92,13 +94,13 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Profile"),
+        title: Text("Profile"),
         backgroundColor: const Color(0xFFf7f7f7),
         elevation: 0,
         actions: [
           IconButton(
             onPressed: logout,
-            icon: const Icon(Icons.logout),
+            icon: Icon(Icons.logout),
           )
         ],
       ),
@@ -119,11 +121,11 @@ class ProfilePage extends StatelessWidget {
             return Column(
               children: [
                 Text(user!['email']),
-                Text(user['username']),
+                Text(user!['username']),
               ],
             );
           } else {
-            return const Text("No data");
+            return Text("No data");
           }
         },
       ),

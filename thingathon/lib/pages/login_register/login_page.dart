@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:thingathon/components/my_button.dart';
 import 'package:thingathon/components/my_textfield.dart';
 import 'package:thingathon/components/signin_button.dart';
+import 'package:thingathon/pages/base_page/base_page.dart';
 import '../../helper/helper_functions.dart';
 import 'forgot_password_page.dart';
 
@@ -107,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                             context,
                             MaterialPageRoute(
                               builder: (context){
-                                return const ForgotPasswordPage();
+                                return ForgotPasswordPage();
                               },
                             ),
                           );
