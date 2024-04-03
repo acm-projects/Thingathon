@@ -2,11 +2,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:path/path.dart' as path;
-import 'package:path_provider/path_provider.dart' as pathProvider;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gallery_saver/gallery_saver.dart';
-import 'package:get/get.dart';
 import 'package:thingathon/pages/camera_page/image_display.dart';
 
 class PhotoScreen extends StatefulWidget {
@@ -77,14 +73,14 @@ class _PhotoScreenState extends State<PhotoScreen> {
     super.dispose();
   }
 
-  Future<void> _initCamera(_selectedCamIndex) async {
+  Future<void> _initCamera(selectedCamIndex) async {
     _controller =
-        CameraController(_cameras[_selectedCamIndex], ResolutionPreset.max);
+        CameraController(_cameras[selectedCamIndex], ResolutionPreset.max);
 
     try {
       await _controller.initialize();
       setState(() {
-        if (_selectedCamIndex == 0) {
+        if (selectedCamIndex == 0) {
           _isFrontCam = false;
         } else {
           _isFrontCam = true;
@@ -114,10 +110,8 @@ class _PhotoScreenState extends State<PhotoScreen> {
   }
 
   void flipCamera() async {
-    if (_controller != null) {
-      await _controller.dispose();
-    }
-
+    await _controller.dispose();
+  
     _selectedCamIndex = (_selectedCamIndex + 1) % _cameras.length;
     _initCamera(_selectedCamIndex);
   }
@@ -185,7 +179,7 @@ class _PhotoScreenState extends State<PhotoScreen> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(10.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

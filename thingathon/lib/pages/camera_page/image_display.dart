@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:thingathon/components/my_button.dart';
 
 class ImageDisplay extends StatelessWidget {
@@ -31,7 +30,7 @@ class ImageDisplay extends StatelessWidget {
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(25),
+                    padding: const EdgeInsets.all(25),
                     child: ClipRRect(
                       borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(8.0),
