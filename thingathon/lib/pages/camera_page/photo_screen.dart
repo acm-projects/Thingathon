@@ -1,12 +1,12 @@
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart' as pathProvider;
+import 'package:intl/intl.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gallery_saver/gallery_saver.dart';
-import 'package:get/get.dart';
 import 'package:thingathon/pages/camera_page/image_display.dart';
 
 class PhotoScreen extends StatefulWidget {
@@ -140,20 +140,12 @@ class _PhotoScreenState extends State<PhotoScreen> {
       });
 
       final XFile capturedImage = await _controller.takePicture();
-      File imageFile = File(capturedImage.path);
       if (mounted) {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => ImageDisplay(imageFile: imageFile)));
+                builder: (context) => ImageDisplay(imageFile: capturedImage)));
       }
-
-      // String imagePath = capturedImage.path;
-      // await GallerySaver.saveImage(imagePath);
-
-      // final String filePath = '$capturePath/${DateTime.now().millisecondsSinceEpoch}.jpg';
-      // _capturedImage = File(capturedImage.path);
-      // _capturedImage!.renameSync(filePath);
     } catch (e) {
       print("Error capturing photo");
     } finally {
@@ -165,11 +157,24 @@ class _PhotoScreenState extends State<PhotoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var now = new DateTime.now();
+    var formatter = new DateFormat('yyyy-MM-dd');
+    String formattedDate = formatter.format(now);
+
+    String currentObject = "Tree";
+
     if (!_isReady) return const Text("Loading...");
     return SafeArea(
       child: Center(
         child: Column(
           children: [
+            Text(
+              '$formattedDate: $currentObject',
+              style: GoogleFonts.poppins(
+                  color: const Color(0xFFFF8159),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22),
+            ),
             Expanded(
               child: Container(
                 margin: const EdgeInsets.only(left: 20, right: 20, top: 10),

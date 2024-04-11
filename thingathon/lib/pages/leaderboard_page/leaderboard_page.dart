@@ -35,7 +35,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
         }
         final users = snapshot.data!.docs;
 
-        Center(
+        return (Center(
           child: Column(
             children: [
               const SizedBox(height: 51),
@@ -95,7 +95,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
                             itemBuilder: (context, index) {
                               final user = users[index];
                               return LeaderBoardTab(
-                                profileIcon: user.profileIcon,
+                                profileIcon: "",
                                 username: user["username"],
                                 points: user["points"],
                               );
@@ -110,9 +110,8 @@ class _LeaderBoardState extends State<LeaderBoard> {
               ),
             ],
           ),
-        );
+        ));
       },
     ));
   }
 }
-

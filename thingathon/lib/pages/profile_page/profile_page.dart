@@ -93,17 +93,6 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Profile"),
-        backgroundColor: const Color(0xFFf7f7f7),
-        elevation: 0,
-        actions: [
-          IconButton(
-            onPressed: logout,
-            icon: Icon(Icons.logout),
-          )
-        ],
-      ),
       body: FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
         future: getUserDetails(),
         builder: (context, snapshot) {
