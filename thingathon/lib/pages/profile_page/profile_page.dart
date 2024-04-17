@@ -7,6 +7,8 @@ class ProfilePage extends StatefulWidget {
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
+int points = 100000;
+
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
@@ -15,26 +17,36 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           SizedBox(height: MediaQuery.of(context).size.height * 0.1),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CircleAvatar(
-                  backgroundImage: AssetImage('assets/empty_avatar.png'),
-                  radius: 20.0,
-                ),
-                Text(
-                  "@balebbae",
-                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-                ),
-                Spacer(),
-                Text(
-                  "100006 points",
-                  style: TextStyle(fontSize: 16.0),
-                ),
-              ],
+            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Color(0xFFFF8159),
+                borderRadius: BorderRadius.circular(25.0), // This adds the rounded corners.
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    backgroundImage: AssetImage('assets/MukPFP.jpg'),
+                    radius: 20.0,
+                  ),
+                  SizedBox(width: 16.0), // Spacer can be replaced with a SizedBox for precise control.
+                  Text(
+                    "@muktheduck",
+                    style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                  ),
+                  Expanded( // This makes the text widget take all available space.
+                    child: Container(),
+                  ),
+                  Text(
+                    points.toString(),
+                    style: TextStyle(fontSize: 16.0),
+                  ),
+                ],
+              ),
             ),
           ),
+
           Expanded(
             child: Center(
               child: Column(
@@ -47,7 +59,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       shape: BoxShape.circle,
                       image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: AssetImage('assets/empty_profile.png'),
+                        image: AssetImage('assets/MukPFP.jpg'),
                       ),
                     ),
                   ),
@@ -57,25 +69,14 @@ class _ProfilePageState extends State<ProfilePage> {
                     style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    "100006 points",
-                    style: TextStyle(fontSize: 22.0, color: Colors.grey),
+                    points.toString(),
+                    style: TextStyle(fontSize: 22.0, color: Colors.black),
                   ),
                 ],
               ),
             ),
           ),
         ],
-      ),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            IconButton(icon: Image.asset('assets/empty_icon.png'), onPressed: () {}),
-            IconButton(icon: Image.asset('assets/empty_icon.png'), onPressed: () {}),
-            IconButton(icon: Image.asset('assets/empty_icon.png'), onPressed: () {}),
-            IconButton(icon: Image.asset('assets/empty_icon.png'), onPressed: () {}),
-          ],
-        ),
       ),
     );
   }
