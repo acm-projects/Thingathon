@@ -161,7 +161,7 @@ class _PhotoScreenState extends State<PhotoScreen> {
     var formatter = new DateFormat('yyyy-MM-dd');
     String formattedDate = formatter.format(now);
 
-    String currentObject = "Tree";
+    String currentObject = "Dog";
 
     if (!_isReady) return const Text("Loading...");
     return SafeArea(

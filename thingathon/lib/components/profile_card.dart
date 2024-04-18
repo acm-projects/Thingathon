@@ -8,8 +8,8 @@ import 'package:thingathon/schema/user.dart';
 class ProfileCard extends StatefulWidget {
   final String username;
   final String date;
-  final Image profileIcon;
-  final Image postImage;
+  final FileImage profileIcon;
+  final FileImage postImage;
   const ProfileCard(
       {super.key,
       required this.username,
@@ -46,21 +46,24 @@ class _ProfileCardState extends State<ProfileCard> {
                           style: GoogleFonts.poppins(
                               fontSize: 16,
                               fontWeight: FontWeight.w800,
-                              color: Colors.white)),
-                      const SizedBox(width: 1.5),
+                              color: const Color(0xFFFF8159))),
+                      const SizedBox(width: 150),
                       Expanded(
-                        child: Text('@${widget.date}',
+                        child: Text('${widget.date} Points',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: GoogleFonts.poppins(
                                 fontSize: 14,
-                                color: Colors.grey.shade600,
-                                fontWeight: FontWeight.w400)),
+                                color: const Color.fromARGB(255, 34, 34, 34),
+                                fontWeight: FontWeight.w700)),
                       )
                     ],
                   ),
                   const SizedBox(width: 10),
-                  //Image(image: image)
+                  Image(
+                    image: widget.postImage,
+                    fit: BoxFit.cover, // Adjust fit as needed
+                  ),
                 ],
               ),
             ),
