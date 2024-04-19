@@ -13,6 +13,8 @@ class FireStorage {
 
     DateTime now = DateTime.now();
     DateTime currentDate = DateTime(now.month, now.day);
+    
+    String currentObj = "dog";
 
     print(currentDate);
 
@@ -25,7 +27,7 @@ class FireStorage {
       await userDoc
           .collection("Images")
           .doc(currentTime)
-          .set({'imageURL': imageURL, 'postDate': currentDate});
+          .set({'imageURL': imageURL, 'postDate': currentDate, 'thing': currentObj});
 
       await userDoc.get().then((value) {
         if (value.data() != null) {
