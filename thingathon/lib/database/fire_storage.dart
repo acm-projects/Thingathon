@@ -11,6 +11,11 @@ class FireStorage {
     String currentTime = DateTime.now().millisecondsSinceEpoch.toString();
     final userImageRef = imagesFolderRef.child(currentTime);
 
+    DateTime now = DateTime.now();
+    DateTime currentDate = DateTime(now.month, now.day);
+
+    print(currentDate);
+
     try {
       await userImageRef.putFile(File(imageFile.path));
       String imageURL = await userImageRef.getDownloadURL();
@@ -20,7 +25,7 @@ class FireStorage {
       await userDoc
           .collection("Images")
           .doc(currentTime)
-          .set({'imageURL': imageURL});
+          .set({'imageURL': imageURL, 'postDate': currentDate});
 
       await userDoc.get().then((value) {
         if (value.data() != null) {
