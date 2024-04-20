@@ -2,8 +2,11 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:thingathon/components/dialog_popup.dart';
 import 'package:thingathon/components/profile_card.dart';
 import 'package:thingathon/helper/helper_functions.dart';
 
@@ -76,28 +79,64 @@ class _FriendPageState extends State<FriendPage> {
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     var usersWithImages = snapshot.data!;
-                    print(usersWithImages);
 
-                    return Scaffold(
-                      backgroundColor: Colors.transparent,
-                      body: ListView.separated(
-                          separatorBuilder: (context, index) =>
-                              const Divider(thickness: 0.2),
-                          physics: const BouncingScrollPhysics(),
-                          itemCount: usersWithImages.length,
-                          padding: const EdgeInsets.all(16),
-                          itemBuilder: (context, index) {
-                            var user = usersWithImages[index];
-                            final imageProvider = FileImage(user["imageFile"]);
+                    if (usersWithImages.isEmpty) {
+                      return Center(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.error,
+                                  color: Color(0xFFFF8159),
+                                  size: 75.0,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  "There seems to be no one here",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 15,
+                                    color: Color(0xFFFF8159),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    } else {
+                      return Scaffold(
+                        backgroundColor: Colors.transparent,
+                        body: ListView.separated(
+                            separatorBuilder: (context, index) =>
+                                const Divider(thickness: 0.2),
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: usersWithImages.length,
+                            padding: const EdgeInsets.all(16),
+                            itemBuilder: (context, index) {
+                              var user = usersWithImages[index];
+                              final imageProvider =
+                                  FileImage(user["imageFile"]);
 
-                            return ProfileCard(
-                              profileIcon: imageProvider,
-                              username: user["username"],
-                              date: user["points"].toString(),
-                              postImage: imageProvider,
-                            );
-                          }),
-                    );
+                              return ProfileCard(
+                                profileIcon: imageProvider,
+                                username: user["username"],
+                                date: user["points"].toString(),
+                                postImage: imageProvider,
+                              );
+                            }),
+                      );
+                    }
                   } else {
                     return const Center(
                       child: CircularProgressIndicator(),

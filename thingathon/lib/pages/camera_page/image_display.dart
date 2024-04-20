@@ -4,12 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:thingathon/components/my_button.dart';
 import 'package:thingathon/database/fire_storage.dart';
-import 'package:thingathon/database/firestore.dart';
 import 'package:thingathon/pages/base_page/base_page.dart';
-import 'package:thingathon/pages/camera_page/home_page.dart';
 
 class ImageDisplay extends StatelessWidget {
   final XFile imageFile;
@@ -55,7 +52,7 @@ class ImageDisplay extends StatelessWidget {
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(25),
+                    padding: const EdgeInsets.all(25),
                     child: ClipRRect(
                       borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(8.0),

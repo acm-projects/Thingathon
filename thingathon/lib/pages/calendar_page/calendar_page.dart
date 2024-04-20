@@ -1,5 +1,18 @@
+import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:thingathon/components/dialog_popup.dart';
+import 'package:thingathon/helper/helper_functions.dart';
+
+FirebaseFirestore fs = FirebaseFirestore.instance;
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({Key? key}) : super(key: key);
@@ -20,14 +33,45 @@ class _CalendarPageState extends State<CalendarPage> {
     _focusedDay = DateTime.now();
   }
 
-  void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
+  Future<void> _onDaySelected(DateTime selectedDay, DateTime focusedDay) async {
     if (!isSameDay(_selectedDay, selectedDay)) {
       setState(() {
         _selectedDay = selectedDay;
         _focusedDay = focusedDay; // update `_focusedDay` here as well
       });
 
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => PhotoExample(date: selectedDay)));
+      String userEmail = getUserEmail();
+      final imageCollection =
+          await fs.collection("Users").doc(userEmail).collection("Images");
+
+      var formatter = new DateFormat('yyyy-MM-dd');
+      String formattedDate = formatter.format(selectedDay);
+
+      var imageDocs = await imageCollection
+          .where('postDate', isEqualTo: formattedDate)
+          .get();
+
+      print(imageDocs.docs);
+
+      if (imageDocs.docs.isNotEmpty) {
+        var docSnapshot = imageDocs.docs[0];
+        final imageURL = docSnapshot.data()['imageURL'];
+        final tempDir = await getTemporaryDirectory();
+        final path = '${tempDir.path}/${docSnapshot.id}';
+
+        await Dio().download(imageURL, path);
+
+        File imageFile = File(path);
+
+        Get.to(PhotoExample(
+          date: formattedDate,
+          postImage: FileImage(imageFile),
+        ));
+      } else {
+        Get.dialog(const DialogPopup(text1: "Alert", text2: "No posts for this date", text3: "Sounds good!"));
+      }
+
+      //Get.to(PhotoExample(date: selectedDay));
     }
   }
 
@@ -37,53 +81,45 @@ class _CalendarPageState extends State<CalendarPage> {
       body: Column(
         children: [
           // Custom header with BoxDecoration and circular edges
-          Container(
-            // decoration: BoxDecoration(
-            //   color: Color(0xFFFF8159), // Background color of the header
-            //   borderRadius: BorderRadius.all(Radius.circular(40)),
-            // ),
-            //padding: EdgeInsets.symmetric(vertical: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              
-            ),
-          ),
-          TableCalendar(
-            firstDay: DateTime.utc(2010, 10, 16),
-            lastDay: DateTime.utc(2030, 3, 14),
-            focusedDay: _focusedDay,
-            selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-            onDaySelected: _onDaySelected,
-            calendarFormat: _calendarFormat,
-            onFormatChanged: (format) {
-              if (_calendarFormat != format) {
-                setState(() {
-                  _calendarFormat = format;
-                });
-              }
-            },
-            onPageChanged: (focusedDay) {
-              _focusedDay = focusedDay;
-            },
-            headerStyle: HeaderStyle(
-              decoration: BoxDecoration(
-                color: Color(0xFFFF8159),
-                borderRadius: BorderRadius.circular(60),
+          const SizedBox(height: 10),
+          SafeArea(
+            child: TableCalendar(
+              firstDay: DateTime.utc(2010, 10, 16),
+              lastDay: DateTime.utc(2030, 3, 14),
+              focusedDay: _focusedDay,
+              selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+              onDaySelected: _onDaySelected,
+              calendarFormat: _calendarFormat,
+              onFormatChanged: (format) {
+                if (_calendarFormat != format) {
+                  setState(() {
+                    _calendarFormat = format;
+                  });
+                }
+              },
+              onPageChanged: (focusedDay) {
+                _focusedDay = focusedDay;
+              },
+              headerStyle: HeaderStyle(
+                decoration: BoxDecoration(
+                  color: const Color(0xFFFF8159),
+                  borderRadius: BorderRadius.circular(60),
+                ),
+                formatButtonVisible: false,
+                titleCentered: true,
+              ), // Hide default header
+              calendarStyle: const CalendarStyle(
+                selectedDecoration: BoxDecoration(
+                  color: Color(0xFFFF8159),
+                  shape: BoxShape.circle,
+                ),
               ),
-              formatButtonVisible: false,
-              titleCentered: true,
-            ), // Hide default header
-            calendarStyle: CalendarStyle(
-              selectedDecoration: const BoxDecoration(
-                color: Color(0xFFFF8159),
-                shape: BoxShape.circle,
+              daysOfWeekHeight: 40,
+              rowHeight: 80,
+              daysOfWeekStyle: const DaysOfWeekStyle(
+                weekdayStyle: TextStyle(color: Color(0xFF000000)),
+                weekendStyle: TextStyle(color: Color(0xFF000000)),
               ),
-            ),
-            daysOfWeekHeight: 40,
-            rowHeight: 95,
-            daysOfWeekStyle: DaysOfWeekStyle(
-              weekdayStyle: const TextStyle(color: Color(0xFF000000)),
-              weekendStyle: const TextStyle(color: Color(0xFF000000)),
             ),
           ),
         ],
@@ -93,18 +129,20 @@ class _CalendarPageState extends State<CalendarPage> {
 }
 
 class PhotoExample extends StatelessWidget {
-  final DateTime date;
+  final String date;
+  final FileImage postImage;
 
-  const PhotoExample({Key? key, required this.date}) : super(key: key);
+  const PhotoExample({Key? key, required this.date, required this.postImage})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFFFF8159),
+        backgroundColor: const Color(0xFFFF8159),
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -116,10 +154,11 @@ class PhotoExample extends StatelessWidget {
               'assets/Thingathon.png',
               height: 40,
             ),
-            SizedBox(width: 30), // Add some space between the logo and the text
+            const SizedBox(
+                width: 30), // Add some space between the logo and the text
             Text(
-              '${date.day}/${date.month}/${date.year}',
-              style: TextStyle(
+              date,
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -132,9 +171,8 @@ class PhotoExample extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: AssetImage('assets/MukPFP.jpg'),
+            image: postImage,
           ),
-          
         ),
       ),
     );
