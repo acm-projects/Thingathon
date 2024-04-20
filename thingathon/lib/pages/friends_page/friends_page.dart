@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:thingathon/components/profile_card.dart';
 import 'package:thingathon/helper/helper_functions.dart';
@@ -16,6 +17,9 @@ class FriendPage extends StatefulWidget {
 }
 
 class _FriendPageState extends State<FriendPage> {
+  String currentObj = "dog";
+  late String _formattedDate;
+
   Future<List<dynamic>> getCurrentPost() async {
     var posts = [];
     final userDocs = await fs.collection("Users").get();
@@ -32,8 +36,10 @@ class _FriendPageState extends State<FriendPage> {
     for (var userObject in usersWithImages) {
       var imageRef = userObject['imagesRef'];
 
-      var imageDocs =
-          await imageRef.where("isThingThere", isEqualTo: true).get();
+      var imageDocs = await imageRef
+          .where('thing', isEqualTo: currentObj)
+          .where('postDate', isEqualTo: _formattedDate)
+          .get();
 
       for (var docSnapshot in imageDocs.docs) {
         final imageURL = docSnapshot.data()['imageURL'];
@@ -53,6 +59,9 @@ class _FriendPageState extends State<FriendPage> {
   @override
   void initState() {
     super.initState();
+    var now = DateTime.now();
+    var formatter = DateFormat('yyyy-MM-dd');
+    _formattedDate = formatter.format(now);
     getCurrentPost();
   }
 
@@ -90,7 +99,7 @@ class _FriendPageState extends State<FriendPage> {
                           }),
                     );
                   } else {
-                   return const Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   }

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart' as path;
@@ -140,12 +141,8 @@ class _PhotoScreenState extends State<PhotoScreen> {
       });
 
       final XFile capturedImage = await _controller.takePicture();
-      if (mounted) {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ImageDisplay(imageFile: capturedImage)));
-      }
+      Get.to(ImageDisplay(imageFile: capturedImage));
+      
     } catch (e) {
       print("Error capturing photo");
     } finally {
