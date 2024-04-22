@@ -28,9 +28,9 @@ class ImageDisplay extends StatelessWidget {
       if (userEmail != null) {
         correctImage = await FireStorage.uploadImage(imageFile, userEmail);
 
-        if (correctImage && context.mounted) {
-          Get.to(const BasePage());
-        }
+        // if (correctImage && context.mounted) {
+        //   Get.to(const BasePage());
+        // }
       }
     }
 
