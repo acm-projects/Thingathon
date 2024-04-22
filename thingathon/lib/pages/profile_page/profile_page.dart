@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/my_button.dart';
@@ -78,6 +79,15 @@ class _ProfilePageState extends State<ProfilePage> {
                   Text(
                     points.toString(),
                     style: const TextStyle(fontSize: 22.0, color: Colors.black),
+                  ),
+                  const SizedBox(height: 20),
+                  MyButton(
+                    buttonColor: const Color(0xFFFF8159),
+                    text: "Sign Out",
+                    onTap: () {
+                      FirebaseAuth.instance.signOut();
+                    },
+                    horizontalMargin: 100,
                   ),
                 ],
               ),
