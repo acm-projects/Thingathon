@@ -20,16 +20,36 @@ class FireStorage {
     String currentObj = "dog";
 
     // Post Request to endpoint
-    // Dio dio = new Dio();
+
+    Dio dio = Dio();
     bool correctObject = true;
-    // const String endPoint = "";
+    const String endPoint = "http://127.0.0.1:5000/process-request";
 
-    // var imageBytes = await imageFile.readAsBytes();
-    // var base64img = base64Encode(imageBytes);
+    var imageBytes = await imageFile.readAsBytes();
+    var base64img = base64Encode(imageBytes);
 
-    // Response res = await dio.post(endPoint, data: {'base64img': base64img});
-
-    // print(res.data);
+    try {
+      final response = await dio.post(
+        "http://192.168.1.113:5000/process-request", // Your API endpoint URL
+        data: {
+          'base64': base64img,
+          'thing': currentObj
+        }, // The data to be sent in the request body
+      );
+      String stringBool = response.data['bool'];
+      if (stringBool == "false"){
+        correctObject = false;
+      }
+      else {
+        correctObject = true;
+      }
+      print(correctObject);
+    } on DioException catch (e) {
+      // Handle DioError exceptions (e.g., network errors, status code errors)
+      print(e.error); // Log the error message
+      throw Exception(
+          'Error making POST request'); // Re-throw a generic exception
+    }
 
     // End of Post Request
 
