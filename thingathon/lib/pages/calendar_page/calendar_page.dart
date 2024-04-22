@@ -44,7 +44,7 @@ class _CalendarPageState extends State<CalendarPage> {
       final imageCollection =
           await fs.collection("Users").doc(userEmail).collection("Images");
 
-      var formatter = new DateFormat('yyyy-MM-dd');
+      var formatter = DateFormat('yyyy-MM-dd');
       String formattedDate = formatter.format(selectedDay);
 
       var imageDocs = await imageCollection

@@ -103,7 +103,7 @@ class _FriendPageState extends State<FriendPage> {
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w700,
                                     fontSize: 15,
-                                    color: Color(0xFFFF8159),
+                                    color: const Color(0xFFFF8159),
                                   ),
                                 ),
                                 const SizedBox(

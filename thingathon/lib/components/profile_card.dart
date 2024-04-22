@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:thingathon/schema/user.dart';
 
 class ProfileCard extends StatefulWidget {
   final String username;
@@ -29,7 +25,7 @@ class _ProfileCardState extends State<ProfileCard> {
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               radius: 23,
               //backgroundImage: ,
             ),

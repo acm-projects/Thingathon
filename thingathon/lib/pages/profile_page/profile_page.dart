@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../components/my_button.dart';
 
 class ProfilePage extends StatefulWidget {
-  ProfilePage({super.key});
+  const ProfilePage({super.key});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -19,24 +19,24 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           SizedBox(height: MediaQuery.of(context).size.height * 0.1),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             child: Container(
               decoration: BoxDecoration(
-                color: Color(0xFFFF8159),
+                color: const Color(0xFFFF8159),
                 borderRadius: BorderRadius.circular(
                     25.0), // This adds the rounded corners.
               ),
-              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               child: Row(
                 children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage('assets/MukPFP.jpg'),
+                  const CircleAvatar(
+                    backgroundImage: const AssetImage('assets/MukPFP.jpg'),
                     radius: 20.0,
                   ),
-                  SizedBox(
+                  const SizedBox(
                       width:
                           16.0), // Spacer can be replaced with a SizedBox for precise control.
-                  Text(
+                  const Text(
                     "@muktheduck",
                     style:
                         TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
@@ -47,7 +47,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   Text(
                     points.toString(),
-                    style: TextStyle(fontSize: 16.0),
+                    style: const TextStyle(fontSize: 16.0),
                   ),
                 ],
               ),
@@ -61,7 +61,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Container(
                     width: 200,
                     height: 200,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
                         fit: BoxFit.cover,
@@ -69,15 +69,15 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 8.0),
-                  Text(
+                  const SizedBox(height: 8.0),
+                  const Text(
                     "@balebbae",
                     style:
                         TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
                   ),
                   Text(
                     points.toString(),
-                    style: TextStyle(fontSize: 22.0, color: Colors.black),
+                    style: const TextStyle(fontSize: 22.0, color: Colors.black),
                   ),
                 ],
               ),

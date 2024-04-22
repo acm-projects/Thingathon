@@ -15,7 +15,7 @@ class FireStorage {
     final userImageRef = imagesFolderRef.child(currentTime);
 
     var now = DateTime.now();
-    var formatter = new DateFormat('yyyy-MM-dd');
+    var formatter = DateFormat('yyyy-MM-dd');
     String formattedDate = formatter.format(now);
     String currentObj = "dog";
 

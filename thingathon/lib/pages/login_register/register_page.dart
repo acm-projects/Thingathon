@@ -77,6 +77,7 @@ class _RegisterPageState extends State<RegisterPage> {
          .set({
        'email': userCredential.user!.email,
        'username': usernameController.text,
+       'points': 0,
      });
    }
   }
