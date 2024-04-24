@@ -17,12 +17,12 @@ class FireStorage {
     var now = DateTime.now();
     var formatter = DateFormat('yyyy-MM-dd');
     String formattedDate = formatter.format(now);
-    String currentObj = "dog";
+    String currentObj = "cell phone";
 
     // Post Request to endpoint
 
     Dio dio = Dio();
-    bool correctObject = true;
+    bool correctObject = false;
     const String endPoint = "http://127.0.0.1:5000/process-request";
 
     var imageBytes = await imageFile.readAsBytes();
@@ -30,20 +30,20 @@ class FireStorage {
 
     try {
       final response = await dio.post(
-        "http://192.168.1.113:5000/process-request", // Your API endpoint URL
+        "http://10.169.173.153:5000/process-request", // Your API endpoint URL
         data: {
           'base64': base64img,
           'thing': currentObj
         }, // The data to be sent in the request body
       );
       String stringBool = response.data['bool'];
-      if (stringBool == "false"){
+      if (stringBool == "False"){
         correctObject = false;
       }
       else {
         correctObject = true;
       }
-      print(correctObject);
+      print("\n\n\n\n\n\n\n\n Stringbool: ${stringBool}\n Correct Object: ${correctObject}\n\n\n\n\n\n");
     } on DioException catch (e) {
       // Handle DioError exceptions (e.g., network errors, status code errors)
       print(e.error); // Log the error message

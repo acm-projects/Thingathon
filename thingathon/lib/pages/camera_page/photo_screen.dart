@@ -32,11 +32,15 @@ class _PhotoScreenState extends State<PhotoScreen> {
 
   Future<void> requestCameraPermission() async {
     final cameraStatus = await Permission.camera.request();
+    if (await Permission.camera.isPermanentlyDenied) {
+      openAppSettings();
+    }
     if (!(await Permission.storage.status.isGranted)) {
       await Permission.storage.request();
     }
     if (cameraStatus.isGranted) {
       _cameras = await availableCameras();
+      print("\n\navaliable cameras: ${_cameras}\n\n");
       _controller = CameraController(_cameras[0], ResolutionPreset.max);
       _controller.initialize().then((_) {
         if (!mounted) {
@@ -142,7 +146,6 @@ class _PhotoScreenState extends State<PhotoScreen> {
 
       final XFile capturedImage = await _controller.takePicture();
       Get.to(ImageDisplay(imageFile: capturedImage));
-      
     } catch (e) {
       print("Error capturing photo");
     } finally {

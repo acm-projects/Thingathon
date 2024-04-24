@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:thingathon/components/dialog_popup.dart';
 import 'package:thingathon/components/profile_card.dart';
 import 'package:thingathon/helper/helper_functions.dart';
 
@@ -39,15 +38,21 @@ class _FriendPageState extends State<FriendPage> {
     for (var userObject in usersWithImages) {
       var imageRef = userObject['imagesRef'];
 
+      print(imageRef);
+      print(_formattedDate);
+
       var imageDocs = await imageRef
           .where('thing', isEqualTo: currentObj)
           .where('postDate', isEqualTo: _formattedDate)
           .get();
 
+      print(imageDocs.docs);
       for (var docSnapshot in imageDocs.docs) {
         final imageURL = docSnapshot.data()['imageURL'];
         final tempDir = await getTemporaryDirectory();
         final path = '${tempDir.path}/${docSnapshot.id}';
+
+        print("\n\nimageURL: ${imageURL}\n\n");
 
         await Dio().download(imageURL, path);
 

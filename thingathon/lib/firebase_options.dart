@@ -17,29 +17,17 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -59,4 +47,45 @@ class DefaultFirebaseOptions {
     projectId: 'thingathon-162d7',
     storageBucket: 'thingathon-162d7.appspot.com',
   );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyAV-g1crNLaa3dykm9sYSHx8yZV1-8E_Do',
+    appId: '1:223816673529:web:a658630f2a105471f5da28',
+    messagingSenderId: '223816673529',
+    projectId: 'thingathon-162d7',
+    authDomain: 'thingathon-162d7.firebaseapp.com',
+    storageBucket: 'thingathon-162d7.appspot.com',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyDh9RUp2ivQiPyMSSwx2zfEKOcQraFqmpk',
+    appId: '1:223816673529:ios:1160c13d2eb05826f5da28',
+    messagingSenderId: '223816673529',
+    projectId: 'thingathon-162d7',
+    storageBucket: 'thingathon-162d7.appspot.com',
+    androidClientId: '223816673529-pctoa5l0sr8bm3a9pik99lefe1svnjq4.apps.googleusercontent.com',
+    iosClientId: '223816673529-p3im3kh3ote96f8fmj514m75g700j9b0.apps.googleusercontent.com',
+    iosBundleId: 'com.example.thingathon',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyDh9RUp2ivQiPyMSSwx2zfEKOcQraFqmpk',
+    appId: '1:223816673529:ios:1160c13d2eb05826f5da28',
+    messagingSenderId: '223816673529',
+    projectId: 'thingathon-162d7',
+    storageBucket: 'thingathon-162d7.appspot.com',
+    androidClientId: '223816673529-pctoa5l0sr8bm3a9pik99lefe1svnjq4.apps.googleusercontent.com',
+    iosClientId: '223816673529-p3im3kh3ote96f8fmj514m75g700j9b0.apps.googleusercontent.com',
+    iosBundleId: 'com.example.thingathon',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyAV-g1crNLaa3dykm9sYSHx8yZV1-8E_Do',
+    appId: '1:223816673529:web:9e9f2618b5f1f0a5f5da28',
+    messagingSenderId: '223816673529',
+    projectId: 'thingathon-162d7',
+    authDomain: 'thingathon-162d7.firebaseapp.com',
+    storageBucket: 'thingathon-162d7.appspot.com',
+  );
+
 }

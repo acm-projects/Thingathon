@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../../components/my_button.dart';
 
@@ -30,9 +31,14 @@ class _ProfilePageState extends State<ProfilePage> {
               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               child: Row(
                 children: [
-                  const CircleAvatar(
-                    backgroundImage: const AssetImage('assets/MukPFP.jpg'),
-                    radius: 20.0,
+                  GestureDetector(
+                    onTap: () {
+                      
+                    },
+                    child: const CircleAvatar(
+                      backgroundImage: const AssetImage('assets/MukPFP.jpg'),
+                      radius: 20.0,
+                    ),
                   ),
                   const SizedBox(
                       width:
